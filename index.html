@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+  <script src="js/jquery.min.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/service.js"></script>
+  <script src="js/config.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+<nav class="top" ng-controller="nav">
+  <div class="container">
+   <a href="#/">
+      <span class="glyphicon glyphicon-home redColor"></span>Home
+    </a>
+    
+    <span>Welcome</span>
+    <a href="#/login">Login</a>
+    <a href="#">Register</a>
+    
+    <span class="pull-right">
+      <a href="#">My Orders</a>
+      <a href="#/cart">
+        <span class="glyphicon glyphicon-shopping-cart redColor"></span><strong>{{getQuantities()}}</strong> items
+      </a>
+    </span> 
+  </div>
+    
+</nav><!-- nav ended -->
+
+<div ng-view></div>
+  
+</body> 
+</html>
+

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="col-sm-4">
+    <a href="#"><img class="logo" src="images/site/logo.png"></a>
+  </div>
+  <div class="searchDiv col-md-8">
+    <input type="text" name="keyword" placeholder="shoes sunglasses">
+    <button class="searchButton" type="submit">Search</button>
+    <div class="searchBelow">
+      <span><a href="#">T-shirts</a></span> |
+      <span><a href="#">dress</a></span> |
+      <span><a href="#">iRobot</a></span> |
+      <span><a href="#">fridge</a></span> |
+    </div>
+  </div>  
+</div><!-- search bar ended -->
+<div class="categoryWithCarousel">
+  <div class="headbar">
+   <div class="container">
+    <div class="head">
+      <span class="glyphicon glyphicon-th-list" style="margin-left: 10px; line-height: 37.5px;"></span>
+      <span style="margin-left: 10px; line-height: 37.5px;">Categories</span>
+    </div>
+    <div class="rightMenu">
+      <span><a href="#">Women</a></span>
+      <span><a href="#">Men</a></span>
+      <span><a href="#">Kids</a></span>
+      <span><a href="#">Electronics</a></span>
+      <span><a href="#">Beauty</a></span>
+      <span><a href="#">Jewellery</a></span>
+    </div>  
+   </div>
+  </div><!-- headbar ended -->
+  <div class="container" style="position: relative;" ng-controller="cateCtrl">
+    <div class="categoryMenu">
+      <div class="eachCategory" ng-repeat="category in categories" ng-mouseenter="showProduct($index)" ng-mouseleave="hideProduct($index)" ng-class="{white: $index == hovering}">
+        <span class="glyphicon glyphicon-link"></span>
+        <a href="#" ng-class="{blue: $index == hovering}">{{category}}</a>
+      </div>
+    </div><!--categoryMenu ended-->
+    <div class="productsAsideCategory" ng-show="loading[$index]" ng-repeat="product in products" ng-mouseenter="showProduct($index)" ng-mouseleave="hideProduct($index)">
+      <div class="row" ng-repeat="row in product">
+        <a href="#" ng-repeat="description in row" ng-class="{blue: $index == 0}">{{description}}</a>
+        <div class="seperator"></div>
+      </div>
+    </div>
+  </div>
+</div><!-- category ended -->
+<div data-ride="carousel" class="carousel-of-product carousel slide" id="carousel-of-product">
+   <!--indicators--->
+    <ol class="carousel-indicators">
+        <li class="active" data-slide-to="0" data-target="#carousel-of-product"></li>
+        <li data-slide-to="1" data-target="#carousel-of-product"></li>
+        <li data-slide-to="2" data-target="#carousel-of-product"></li>
+        <li data-slide-to="3" data-target="#carousel-of-product"></li>
+    </ol>
+    <!--wrapper for slides-->
+    <div role="listbox" class="carousel-inner">
+        <div class="item active"><img src="images/lunbo/1.jpg" class="carousel carouselImage"></div>
+        <div class="item"><img src="images/lunbo/2.jpg" class="carousel carouselImage"></div>
+        <div class="item"><img src="images/lunbo/3.jpg" class="carousel carouselImage"></div>
+        <div class="item"><img src="images/lunbo/4.jpg" class="carousel carouselImage"></div>
+    </div>
+    <!--controls-->
+<!--
+    <a data-slide="prev" role="button" href="#carousel-of-product" class="left carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a>
+    <a data-slide="prev" role="button" href="#carousel-of-product" class="right carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+-->
+</div><!-- carousel ended -->
+  
+<div class="homepageCategoryProducts" ng-controller="homeCateCtrl">
+  <div class="eachHomepageCategoryProduct" ng-repeat="item in cateProducts">
+    <div class="left-mark"></div>
+    <span class="categoryTitle">{{item.title}}</span>
+    <div style="clear: both;"></div>
+    <div class="productItem" ng-repeat="product in item.products">
+      <a href="#"><img ng-src="images/products/{{product.imgNum}}.jpg"/></a>
+      <a href="#" class="productItemDescLink">
+      <span class="productItemDesc">{{product.description}}</span>
+      </a>
+      <span class="productPrice">{{product.price}}</span>
+      <button type="button" class="btn btn-info btn-xs productCart pull-right" ng-click="addItem($parent.$index, $index)"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>    
+    </div>
+    <div style="clear: both;"></div> 
+  </div>
+</div>
