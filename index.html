@@ -8,9 +8,12 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
   <script src="js/app.js"></script>
   <script src="js/service.js"></script>
   <script src="js/config.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/factory.js"></script>
 </head>
 
 <body ng-app="myApp">
@@ -21,8 +24,9 @@
       <span class="glyphicon glyphicon-home redColor"></span>Home
     </a>
     
-    <span>Welcome</span>
-    <a href="#/login">Login</a>
+    <span ng-show="isLoggedIn">Welcome, {{globals.currentUser.username}}</span>
+    <a href="#/login" ng-show="!isLoggedIn">Login, please!</a>
+    <a href="#/logout" ng-show="isLoggedIn" ng-click="logout()">Logout</a>
     <a href="#">Register</a>
     
     <span class="pull-right">
