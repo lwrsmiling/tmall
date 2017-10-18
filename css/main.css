@@ -282,6 +282,12 @@ div.productItem button.productCart{
 }
 /*homepageCategory and products ended*/
 /*shopping cart begin*/
+caption{
+  text-align: center;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+}
 .btn:disabled{
   background-color: #ddd;
 }

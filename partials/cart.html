@@ -1,4 +1,8 @@
-<table class="table table-hover ng-show=items.length">
+<div class="alert alert-dismissible alert-success" ng-show="confirmed">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Order Placed!</strong> Click <a href="#/orders">here</a> to view your orders.
+</div>
+ <table class="table table-hover ng-show=items.length">
   <caption>Shopping Cart</caption>
   <tr>
     <th style="width: 5%">No.</th>
@@ -14,7 +18,7 @@
     <td class="bold">{{item.price | number:2}}</td>
     <td>
       <button type="button" class="btn btn-default btn-xs" ng-click="reduceQuantity($index)" ng-disabled="item.quantity<=0">-</button>
-      <input type="text" size="3" ng-model="item.quantity">
+      <input type="text" size="3" ng-model="item.quantity" class="text-center">
       <button type="button" class="btn btn-default btn-xs" ng-click="addQuantity($index)">+</button>
     </td>
     <td class="bold mark">{{item.price*item.quantity | number:2}}</td>
@@ -24,29 +28,20 @@
   </tr>
 </table>
 <div class="empty" ng-show="!items.length">Your shopping cart is empty now. Go add something!</div>
-<div class="total">
-  Ordered: <span class="mark">{{getQuantities()}} items</span>
-  Total: <span class="mark" ng-show="getAmount()<15000">{{getAmount() | number:2 }}</span>
-  <span class="mark" ng-show="getAmount()>=15000">
-    {{getAmount()*discount|number:2}}<span class="btn btn-xs">(10% off)</span>
-    <span class="discount">({{getAmount()|number:2}})</span>
-  </span>
-  <button type="button" class="btn btn-primary btn-sm">Confirm</button>
-</div>
-<div class="container">
+<div class="container" ng-show="items.length">
 	<div class="row">
-		 <form class="form-horizontal">
+		 <form class="form-horizontal col-sm-5">
             <fieldset>
                 <!-- Address form -->
          
-                <h2>Address</h2>
+                <h4>Please enter your address below</h4>
          
                 <!-- full-name input-->
                 <div class="control-group">
                     <label class="control-label">Full Name</label>
                     <div class="controls">
                         <input id="full-name" name="full-name" type="text" placeholder="full name"
-                        class="input-xlarge">
+                        class="input-xlarge" ng-model="addressForm.name">
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -55,7 +50,7 @@
                     <label class="control-label">Address Line 1</label>
                     <div class="controls">
                         <input id="address-line1" name="address-line1" type="text" placeholder="address line 1"
-                        class="input-xlarge">
+                        class="input-xlarge" ng-model="addressForm.address1">
                         <p class="help-block">Street address, P.O. box, company name, c/o</p>
                     </div>
                 </div>
@@ -64,7 +59,7 @@
                     <label class="control-label">Address Line 2</label>
                     <div class="controls">
                         <input id="address-line2" name="address-line2" type="text" placeholder="address line 2"
-                        class="input-xlarge">
+                        class="input-xlarge" ng-model="addressForm.address2">
                         <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
                     </div>
                 </div>
@@ -72,7 +67,7 @@
                 <div class="control-group">
                     <label class="control-label">City / Town</label>
                     <div class="controls">
-                        <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
+                        <input id="city" name="city" type="text" placeholder="city" class="input-xlarge" ng-model="addressForm.city">
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -81,7 +76,7 @@
                     <label class="control-label">State / Province / Region</label>
                     <div class="controls">
                         <input id="region" name="region" type="text" placeholder="state / province / region"
-                        class="input-xlarge">
+                        class="input-xlarge" ng-model="addressForm.province">
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -90,7 +85,7 @@
                     <label class="control-label">Zip / Postal Code</label>
                     <div class="controls">
                         <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
-                        class="input-xlarge">
+                        class="input-xlarge" ng-model="addressForm.postcode">
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -98,14 +93,22 @@
                 <div class="control-group">
                     <label class="control-label">Country</label>
                     <div class="controls">
-                        <select id="country" name="country" class="input-xlarge">
-                            <option value="" selected="selected">(please select a country)</option>
-                            <option value="CA">Canada</option>
-                            <option value="US">United States</option>
-                        </select>
+                        <input id="country" name="country" type="text" placeholder="country name" class="input-xlarge" ng-model="addressForm.country">
+                        <p class="help-block"></p>
                     </div>
                 </div>
             </fieldset>
         </form>
 	</div>
 </div>
+<div class="total" ng-show="items.length">
+  Ordered: <span class="mark">{{getQuantities()}} items</span>
+  Total: <span class="mark" ng-show="getAmount()<15000">{{getAmount() | number:2 }}</span>
+  <span class="mark" ng-show="getAmount()>=15000">
+    {{getAmount()*discount|number:2}}<span class="btn btn-xs">(10% off)</span>
+    <span class="discount">({{getAmount()|number:2}})</span>
+  </span>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="confirm()">Confirm</button>
+</div>
+
+

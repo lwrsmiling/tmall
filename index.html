@@ -18,7 +18,7 @@
 
 <body ng-app="myApp">
 
-<nav class="top" ng-controller="nav">
+<nav class="top" ng-controller="navCtrl">
   <div class="container">
    <a href="#/">
       <span class="glyphicon glyphicon-home redColor"></span>Home
@@ -27,10 +27,10 @@
     <span ng-show="globals.currentUser">Welcome, {{globals.currentUser.username}}</span>
     <a href="#/login" ng-show="!globals.currentUser">Login, please!</a>
     <a href="#/logout" ng-show="globals.currentUser" ng-click="logout()">Logout</a>
-    <a href="#">Register</a>
+    <a href="#/login">Register</a>
     
     <span class="pull-right">
-      <a href="#">My Orders</a>
+      <a href="#/orders">My Orders</a>
       <a href="#/cart">
         <span class="glyphicon glyphicon-shopping-cart redColor"></span><strong>{{getQuantities()}}</strong> items
       </a>

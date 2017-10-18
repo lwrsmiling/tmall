@@ -18,7 +18,6 @@ app.controller('homeCateCtrl', function($scope, MyService){
   $scope.cateProducts = MyService.getCateProducts();
   $scope.addItem = function (parentIndex, childIndex){
 			MyService.addItem(parentIndex, childIndex);
-      alert(parentIndex, childIndex);
 		};
 });
 
@@ -48,9 +47,19 @@ app.controller('cartCtrl', function($scope, MyService){
     });
     return amount;
   };
+  $scope.addressForm = MyService.getAddress();
+  $scope.confirmed = false;
+  $scope.confirm = function(){
+    MyService.confirm();
+    $scope.confirmed = true;
+  };
 });
 
-app.controller('nav', function($scope, MyService, $rootScope, $cookieStore, AuthService){
+app.controller('ordersCtrl', function($scope, MyService){
+  $scope.orders = MyService.getOrders();
+});
+
+app.controller('navCtrl', function($scope, MyService, $rootScope, $cookieStore, AuthService){
   $scope.items = MyService.getCartItems();
   $scope.getQuantities = function(){
     var totalNum = 0;
@@ -61,39 +70,20 @@ app.controller('nav', function($scope, MyService, $rootScope, $cookieStore, Auth
   };
   $scope.logout = function(){
     AuthService.clearCredentials();
-    $rootScope.isLoggedIn = false;
-//    $scope.isLoggedIn = false;
   }
 });
 
-//app.controller('loginCtrl', function($scope, $rootScope, AUTH_EVENTS, AuthService){
-//  $scope.credentials = {
-//    username: '',
-//    password: ''
-//  };
-//  $scope.login = function(credentials){
-//    AuthService.login(credentials).then(function(user){
-//      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-//      $scope.setCurrentUser(user);
-//    }, function(){
-//      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-//    });
-//  };
-//  javascript:void(0);
-//});
 app.controller('loginCtrl', function($scope, $rootScope, $location, AuthService){
   AuthService.clearCredentials();
   $scope.login = function(){
     $scope.dataLoading = true;
     AuthService.login($scope.username, $scope.password, function(response){
       if(response.success){
-//        $rootScope.isLoggedIn = true;
         AuthService.setCredentials($scope.username, $scope.password);
         console.log($location.path());
         $location.path('/');
       }
       else{
-        $rootScope.isLoggedIn = false;
         $scope.error = response.message;
         $scope.dataLoading = false;
       }

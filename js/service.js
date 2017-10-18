@@ -1,4 +1,4 @@
-app.service('MyService', function(){
+app.service('MyService', function($rootScope){
   var service = this;
   service.categories = ['Women', 'Men', 'Kids', 'Baby & Child', 'Home & Garden', 'Electronics & Computers', 'Health & Beauty', 'Jewellery & Watches', 'Musical Instruments', 'Sports & Outdoors', 'Tools & Hardware', 'Movies & TV Shows', 'Office Supplies', 'Luggage & Bags', 'Food & Beverage'];
   
@@ -155,6 +155,14 @@ app.service('MyService', function(){
       imgNum: 1,
       description: "[热销] 好先生同款墨镜孙红雷偏光男士太阳镜韩明星",
       price: 97.50,
+    quantity: 1}
+  ];
+  var quantities = 0;
+  var orderItems = [
+    {
+      imgNum: 1,
+      description: "[热销] 好先生同款墨镜孙红雷偏光男士太阳镜韩明星",
+      price: 97.50,
       quantity: 1
      },
      {imgNum: 2,
@@ -168,6 +176,30 @@ app.service('MyService', function(){
       quantity: 1
      }
   ];
+  
+  var addressForm = {
+    name: 'Guest',
+    address1: 'Metro',
+    address2: 'abc',
+    city: 'Vancouver',
+    province: 'BC',
+    postcode:'BCBCBC',
+    country: 'Canada'
+  };
+  
+  var orders = [{
+    orderItems: orderItems,
+    date: '2017/10/01',
+    addressForm: {
+      name: 'Guest',
+      address1: '#11',
+      address2: 'MetroTown',
+      city: 'Vancouver',
+      province: 'BC',
+      postcode:'BCBCBC',
+      country: 'Canada'
+    }
+  }];
   
   service.discount = 0.9;
   
@@ -185,6 +217,7 @@ app.service('MyService', function(){
       newItem.quantity = 1;
       cartItems.push(newItem);
     }
+    $rootScope.itemAdded = true;
   };
   
   service.getCateProducts = function(){
@@ -194,6 +227,13 @@ app.service('MyService', function(){
   service.getCartItems = function(){
     return cartItems;
   }
+  
+//  service.getQuantities = function(){
+//    for(var i=0;i<cartItems.length;i++){
+//      quantities += parseInt(cartItems[i].quantity);
+//    }
+//    return quantities;
+//  }
   
   service.addQuantity = function(index){
     cartItems[index].quantity++;
@@ -209,18 +249,23 @@ app.service('MyService', function(){
     }
   };
  
-//  service.getQuantities = function(){
-//     var totalNum = 0;
-//    cartItems.forEach(function(item, index){
-//      totalNum += parseInt(item.quantity);
-//    });
-//    return totalNum;
-//  };
-//  service.getAmount = function(){
-//    var amount = 0;
-//    cartItems.forEach(function(item, index){
-//      amount += parseInt(item.price*item.quantity);
-//    });
-//    return amount;
-//  };
+  service.getAddress = function(){
+    return addressForm;
+  };
+  
+  service.confirm = function(){ 
+    var date = [new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()];
+    var newOrder = {
+      orderItems: cartItems,
+      date: date.join("/"),
+      addressForm: addressForm
+    };
+    orders.push(newOrder);
+    cartItems =[];
+  };
+  
+  service.getOrders = function(){
+    return orders;
+  }
+  
 })

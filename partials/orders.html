@@ -1,0 +1,25 @@
+<table class="table table-striped table-hover" ng-repeat="order in orders">
+  <thead>
+    <tr class="warning">
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+<!--      <th>Order Time</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info" ng-repeat="item in order.orderItems">
+      <td>{{item.description}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.quantity*item.price}}</td>
+<!--      <td>{{item.date}}</td>-->
+    </tr>
+    <thead>
+    <tr class="danger">
+      <th>Ship to: {{order.addressForm.address1}}, {{order.addressForm.address2}},{{order.addressForm.city}}</th>
+      <th>Order by:{{order.addressForm.name}}</th>
+      <th>Date:{{order.date}}</th>
+    </tr>
+    </thead>
+  </tbody>
+</table> 

@@ -3,7 +3,7 @@ app.factory('AuthService', ['Base64', '$http', '$cookieStore', '$rootScope', '$t
       var service = {};
       service.login = function(username, password, callback){
         $timeout(function(){
-          var response = {success: username === 'test' && password === 'test'};
+          var response = {success: username === 'guest' && password === '12345'};
           if(!response.success){
             response.message = 'Username or password is incorrect';
           }

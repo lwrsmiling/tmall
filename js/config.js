@@ -17,7 +17,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when('/cart', {
     templateUrl: 'partials/cart.html',
     controller: "cartCtrl",
-    allowAnonymous: false
+    allowAnonymous: true
+  })
+    .when('/orders', {
+      templateUrl: 'partials/orders.html',
+      controller: "ordersCtrl",
+      allowAnonymous: false
   })
     .otherwise({redirectTo: '/'});
 }]);
@@ -29,11 +34,12 @@ app.run(function($location, $rootScope, $log, $route, $cookieStore, $http){
   }
   function onRouteChangeStart(event, next, current){
     if(!next.allowAnonymous && !$rootScope.globals.currentUser){
-      $log.log('Authentication required, redirect to login.');
-      var returnUrl = $location.path();
-      $log.log('return url is ' + returnUrl);
-      event.preventDefault();
       $location.path('/login');
+//      $log.log('Authentication required, redirect to login.');
+//      var returnUrl = $location.path();
+//      $log.log('return url is ' + returnUrl);
+//      event.preventDefault();
+//      $location.path('/login');
 //      $location.path('/login').search({
 //        returnUrl: returnUrl
 //      });
