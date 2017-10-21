@@ -19,3 +19,8 @@
 - [Install and Run MongoDB by Downloading it Manually](https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
 - [MongoDB 备份(mongodump)与恢复(mongorestore)](http://www.runoob.com/mongodb/mongodb-mongodump-mongorestore.html)
 - [Import/export of Mongo DB to Mongolab](https://tanyanam.com/2012/07/02/importexport-of-mongo-db-to-mongolab/)
+- [Mac下安装MongoDB 及使用教程](https://segmentfault.com/a/1190000002547229)
+
+## deploy on heroku
+- [Guide for using MongoDB and deploying to Heroku](https://forum.freecodecamp.org/t/guide-for-using-mongodb-and-deploying-to-heroku/19347)
+- [使用Heroku+mLab 部署Node应用](http://www.jianshu.com/p/4f3c01a02620)
